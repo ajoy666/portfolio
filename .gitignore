@@ -1,0 +1,59 @@
+# dependencies
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# env
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# build
+dist/
+build/
+frontend/dist/
+frontend/build/
+web/dist/
+web/build/
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# runtime uploads/storage
+backend/storage/app/public/about/*
+backend/storage/app/public/cv/*
+backend/storage/app/public/projects/*
+backend/storage/app/public/skills/*
+backend/uploads/*
+
+# keep folder structure
+!backend/storage/app/public/about/.gitkeep
+!backend/storage/app/public/cv/.gitkeep
+!backend/storage/app/public/projects/.gitkeep
+!backend/storage/app/public/skills/.gitkeep
+!backend/uploads/.gitkeep
+
+# local db
+*.sqlite
+*.sqlite3
+*.db
+
+# cache
+.cache/
+.vite/
+.parcel-cache/
+
+# editor/os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

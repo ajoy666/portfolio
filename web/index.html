@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ideas into Reality</title>
+  <meta name="description" content="Personal portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ░░ NOISE OVERLAY ░░ -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ░░ CURSOR ░░ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- ░░ NAV ░░ -->
+    <nav class="nav" id="nav">
+    <a href="#" class="nav-logo" id="navName">—</a>
+
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#projects">Work</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Hire me</a>
+    </div>
+    </nav>
+
+<!-- ░░ HERO ░░ -->
+<section class="hero-showcase" id="hero">
+  <div class="hero-bg">
+    <div class="hero-blob blob-1"></div>
+    <div class="hero-blob blob-2"></div>
+    <div class="hero-blob blob-3"></div>
+  </div>
+
+  <div class="hero-showcase-inner">
+    <div class="hero-showcase-copy reveal">
+      <div class="hero-kicker">
+        <span></span>
+        <p id="heroKickerText">Build your</p>
+      </div>
+
+      <h1 class="hero-display" aria-label="Build your next web">
+        <span class="hero-display-line hero-display-line-1" id="heroWordOne">next</span>
+        <span class="hero-display-line hero-display-line-2" id="heroWordTwo">web</span>
+      </h1>
+
+      <p class="hero-script" id="heroNameScript"></p>
+
+      <!-- <p class="hero-subtitle" id="heroTagline">—</p> -->
+
+      <div class="hero-showcase-actions" id="heroActions">
+        <a href="#projects" class="btn btn-primary">View Work</a>
+        <a href="#" class="btn btn-ghost" id="heroCvBtn" style="display:none">Download CV</a>
+      </div>
+    </div>
+
+    <a href="#contact" class="hero-author-pill reveal" aria-label="Contact">
+      <div class="hero-author-photo" id="heroPhoto">
+        <span id="heroInitial">?</span>
+      </div>
+
+      <div class="hero-author-text">
+        <span>with</span>
+        <strong id="heroAuthorName">Azi Fauzi</strong>
+      </div>
+    </a>
+  </div>
+
+  <div class="hero-showcase-bottom reveal">
+    <div class="hero-meta">
+      <span class="hero-available">
+        <span class="pulse"></span>Available for Projects
+      </span>
+      <span class="hero-location-chip" id="heroLocation"></span>
+    </div>
+
+    <div class="hero-social-list" id="socialList"></div>
+  </div>
+
+  <a href="#projects" class="scroll-down" aria-label="Scroll down">
+    <span class="scroll-down-line"></span>
+  </a>
+</section>
+
+  <!-- ░░ PROJECTS ░░ -->
+  <section class="section projects-section" id="projects">
+    <div class="container">
+      <div class="section-label reveal">Selected Work</div>
+      <div class="projects-header reveal">
+        <h2 class="section-title">Things I've Built</h2>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <!-- populated by JS -->
+        <div class="project-skeleton"></div>
+        <div class="project-skeleton"></div>
+        <div class="project-skeleton"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ SKILLS ░░ -->
+  <section class="section skills-section" id="skills">
+    <div class="container">
+      <div class="section-label reveal">Skills</div>
+      <h2 class="section-title reveal">My Toolkit</h2>
+      <div class="skills-container" id="skillsContainer">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ CONTACT ░░ -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-label reveal">Contact</div>
+      <div class="contact-grid">
+        <div class="contact-left reveal">
+          <h2 class="section-title">Let's Work<br><em>Together.</em></h2>
+          <p class="contact-sub">Got a project in mind? I'd love to hear about it.</p>
+        </div>
+        <div class="contact-right reveal">
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" name="name" placeholder="Your name" required />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="your@email.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <input type="text" name="subject" placeholder="What's it about?" />
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+              <span class="btn-text">Send Message</span>
+              <span class="btn-loading" style="display:none">Sending…</span>
+            </button>
+            <div class="form-status" id="formStatus"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-orb" aria-hidden="true"></div>
+
+      <div class="footer-main">
+        <a href="#contact" class="footer-title">
+          Turning ideas
+          <em>into reality.</em>
+        </a>
+      </div>
+
+      <div class="footer-side footer-portrait-wrap" aria-hidden="true">
+        <img src="assets/photo-footer.png" alt="" class="footer-portrait" />
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy" id="footerCopy">—</p>
+        <p class="footer-made">Crafted with care · <span id="footerLocalTime">Local time</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ░░ PROJECT MODAL ░░ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      <div class="modal-gallery" id="modalGallery"></div>
+      <div class="modal-body">
+        <div class="modal-tags" id="modalTags"></div>
+        <div class="modal-parent-badge-wrap" id="modalParentBadgeWrap"></div>
+        <h3 class="modal-title" id="modalTitle">—</h3>
+        <div class="modal-desc-wrap" id="modalDescWrap">
+          <div class="modal-desc" id="modalDesc">—</div>
+          <div class="modal-desc-hint" id="modalDescHint">Scroll to read more</div>
+        </div>
+        <div class="modal-links" id="modalLinks"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.6/dist/purify.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
