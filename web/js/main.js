@@ -479,7 +479,13 @@ function openModal(project) {
   modalIdx = 0;
 
   if (modalImages.length) {
-    const img = create('img');
+    const bg = create('img', 'modal-gallery-bg');
+    bg.src = modalImages[0].url;
+    bg.alt = '';
+    bg.setAttribute('aria-hidden', 'true');
+    gallery.appendChild(bg);
+
+    const img = create('img', 'modal-gallery-fg');
     img.src = modalImages[0].url;
     img.alt = project.title ?? '';
     gallery.appendChild(img);
@@ -600,7 +606,9 @@ function shiftGallery(dir, project) {
 function goGallery(idx, project) {
   modalIdx = idx;
   const gallery = el('modalGallery');
-  const img = gallery.querySelector('img');
+  const bg = gallery.querySelector('.modal-gallery-bg');
+  const img = gallery.querySelector('.modal-gallery-fg');
+  if (bg) bg.src = modalImages[idx].url;
   if (img) img.src = modalImages[idx].url;
 
   gallery.querySelectorAll('.gallery-dot').forEach((d, i) => {
@@ -670,11 +678,29 @@ function createProjectImage(project, mode = 'large') {
   );
 
   if (thumb?.url) {
-    const img = create('img');
-    img.src = thumb.url;
-    img.alt = project.title ?? '';
-    img.loading = 'lazy';
-    wrap.appendChild(img);
+    if (mode === 'large') {
+      // Blurred backdrop copy — fills the frame so the sides
+      // never look empty even though the foreground image is
+      // shown in full (object-fit: contain).
+      const bg = create('img', 'project-editorial-media-bg');
+      bg.src = thumb.url;
+      bg.alt = '';
+      bg.setAttribute('aria-hidden', 'true');
+      bg.loading = 'lazy';
+      wrap.appendChild(bg);
+
+      const img = create('img', 'project-editorial-media-fg');
+      img.src = thumb.url;
+      img.alt = project.title ?? '';
+      img.loading = 'lazy';
+      wrap.appendChild(img);
+    } else {
+      const img = create('img');
+      img.src = thumb.url;
+      img.alt = project.title ?? '';
+      img.loading = 'lazy';
+      wrap.appendChild(img);
+    }
   } else {
     const ph = create(
       'div',
