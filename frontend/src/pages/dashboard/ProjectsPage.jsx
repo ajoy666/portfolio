@@ -4,6 +4,7 @@ import Select from '../../components/ui/Select';
 import PageHeader from '../../components/ui/PageHeader';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { projectApi, skillApi } from '../../api/services';
+import { compressImageFiles } from '../../utils/imageCompression';
 import {
   Plus,
   Pencil,
@@ -213,15 +214,30 @@ function ScreenshotUploadArea({
   onSetThumbnail,
   isUploading,
 }) {
-  const handleDrop = (e) => {
+  const [isCompressing, setIsCompressing] = useState(false);
+
+  const handleDrop = async (e) => {
     e.preventDefault();
     const files = Array.from(e.dataTransfer.files).filter((f) => f.type.startsWith('image/'));
-    if (files.length) onFilesAdd(files);
+    if (!files.length) return;
+
+    setIsCompressing(true);
+    const compressed = await compressImageFiles(files);
+    setIsCompressing(false);
+
+    onFilesAdd(compressed);
   };
-  const handleInput = (e) => {
+
+  const handleInput = async (e) => {
     const files = Array.from(e.target.files);
-    if (files.length) onFilesAdd(files);
     e.target.value = '';
+    if (!files.length) return;
+
+    setIsCompressing(true);
+    const compressed = await compressImageFiles(files);
+    setIsCompressing(false);
+
+    onFilesAdd(compressed);
   };
 
   return (
@@ -293,8 +309,18 @@ function ScreenshotUploadArea({
         onDragOver={(e) => e.preventDefault()}
         className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-white/[0.10] bg-white/[0.02] py-5 text-sm text-white/30 transition-all hover:border-white/20 hover:bg-white/[0.04]"
       >
-        {isUploading ? <Loader2 size={15} className="animate-spin" /> : <Upload size={15} />}
-        <span>{isUploading ? 'Uploading...' : 'Drop images or click to upload'}</span>
+        {isCompressing || isUploading ? (
+          <Loader2 size={15} className="animate-spin" />
+        ) : (
+          <Upload size={15} />
+        )}
+        <span>
+          {isCompressing
+            ? 'Compressing...'
+            : isUploading
+              ? 'Uploading...'
+              : 'Drop images or click to upload'}
+        </span>
         <input type="file" accept="image/*" multiple className="hidden" onChange={handleInput} />
       </label>
     </div>
