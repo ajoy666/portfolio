@@ -1,0 +1,36 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH and Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: ${{ secrets.VM_PORT }}
+          script: |
+            set -e
+            cd /var/www/portfolio
+
+            echo "-> git pull"
+            git pull origin main
+
+            echo "-> backend"
+            cd backend
+            npm install --production
+            pm2 restart portfolio-api
+
+            echo "-> frontend build"
+            cd ../frontend
+            npm install
+            npm run build
+
+            echo "=== Deploy selesai ==="
