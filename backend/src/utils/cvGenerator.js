@@ -57,22 +57,11 @@ async function fetchCvData(db) {
 }
 
 function buildHtml({ about, socialLinks, skillsByCategory, projects, experiences }) {
-  const contactParts = [];
-  if (about?.email) contactParts.push(about.email);
-  if (about?.location) contactParts.push(about.location);
+  const websiteUrl = 'azi.web.id';
 
-  const githubLink = socialLinks.find((s) => s.platform === 'github');
-  const linkedinLink = socialLinks.find((s) => s.platform === 'linkedin');
-  const phoneLink = socialLinks.find((s) => s.platform === 'phone');
-
-  if (phoneLink) contactParts.unshift(phoneLink.label || phoneLink.url);
-
-  const socialParts = [
-    githubLink ? githubLink.url.replace('https://', '') : null,
-    linkedinLink ? linkedinLink.url.replace('https://www.', '') : null,
-  ].filter(Boolean);
-
-  const allContact = [...contactParts, ...socialParts].join('  |  ');
+  const allContact = [about?.location || null, websiteUrl, about?.email || null]
+    .filter(Boolean)
+    .join('  |  ');
 
   // Experience section — dynamic from DB
   const experienceHtml = experiences
@@ -199,7 +188,7 @@ function buildHtml({ about, socialLinks, skillsByCategory, projects, experiences
 <body>
 
 <div class="hdr-name">${about?.name || ''}</div>
-<div class="hdr-title">${about?.tagline || 'Fullstack Developer'}</div>
+<div class="hdr-title">${about?.tagline}</div>
 <div class="hdr-contact">${allContact}</div>
 <hr class="hdr-divider">
 

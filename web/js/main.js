@@ -314,7 +314,7 @@ async function loadAbout() {
   // Hero big text
   // Untuk desain ini, idealnya about.bio pendek, contoh: "next web"
   // Kalau bio kosong, fallback ke tagline.
-  const rawHeroText = (about.tagline ?? about.bio ?? 'next web').trim();
+  const rawHeroText = ('next web').trim();
 
   const words = rawHeroText.split(/\s+/);
   const firstWord = words.shift() ?? 'next';
