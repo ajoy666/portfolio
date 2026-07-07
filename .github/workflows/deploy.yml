@@ -18,6 +18,10 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             set -e
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use default
+
             cd /var/www/portfolio
 
             echo "-> git pull"
